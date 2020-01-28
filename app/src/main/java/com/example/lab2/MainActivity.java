@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     final Button buttonRock = (Button) findViewById(R.id.buttonRock);
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    OnClickListener listener = new View.OnClickListener() {
+    View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             TextView t = (TextView) findViewById(R.id.playerWeapon);
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 user = 1;
                 choice = (int) (Math.random() * (3 - 1) + 1) + 1;
                 opponet = opponet.computerChoice(choice);
-                computeWin(opponent, 1);
+                computeWin(opponet, 1);
 
 
                 if (v.equals(buttonPaper)) {
@@ -46,14 +47,14 @@ public class MainActivity extends AppCompatActivity {
                     user = 2;
                     choice = (int) (Math.random() * (3 - 1) + 1) + 1;
                     opponet = opponet.computerChoice(choice);
-                    computeWin(opponent, 2);
+                    computeWin(opponet, 2);
                 }
                 if (v.equals(buttonScissors)) {
                     t.setText("Player's Weapon: Scissor");
                     user = 3;
                     choice = (int) (Math.random() * (3 - 1) + 1) + 1;
                     opponet = opponet.computerChoice(choice);
-                    computeWin(opponent, 3);
+                    computeWin(opponet, 3);
                 } else {
                     user = 0;
                 }
