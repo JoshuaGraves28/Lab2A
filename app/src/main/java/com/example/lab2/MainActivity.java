@@ -11,8 +11,57 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
+    final Button buttonRock = (Button) findViewById(R.id.buttonRock);
+    final Button buttonPaper = (Button) findViewById(R.id.buttonPaper);
+    final Button buttonScissors = (Button) findViewById(R.id.buttonScissors);
+    int user;
+    int computer;
+
+
+
+
+
+
+    OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            TextView t = (TextView) findViewById(R.id.playerWeapon);
+            int opponet;
+            int choice;
+
+            if (v.equals(buttonRock)) {
+
+                t.setText("Player's Weapon: Rock");
+                user = 1;
+                choice = (int) (Math.random() * (3 - 1) + 1) + 1;
+                opponet = opponet.computerChoice(choice);
+                computeWin(opponent, 1);
+
+
+                if (v.equals(buttonPaper)) {
+                    t.setText("Player's Weapon: Paper");
+                    user = 2;
+                    choice = (int) (Math.random() * (3 - 1) + 1) + 1;
+                    opponet = opponet.computerChoice(choice);
+                    computeWin(opponent, 2);
+                }
+                if (v.equals(buttonScissors)) {
+                    t.setText("Player's Weapon: Scissor");
+                    user = 3;
+                    choice = (int) (Math.random() * (3 - 1) + 1) + 1;
+                    opponet = opponet.computerChoice(choice);
+                    computeWin(opponent, 3);
+                } else {
+                    user = 0;
+                }
+            }
+        }
+
+        ;
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
