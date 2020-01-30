@@ -21,20 +21,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Weapon player;
     Weapon computer;
 
-    TextView winner = (TextView) findViewById(R.id.winText);
-    TextView playerWeapon = (TextView) findViewById(R.id.playerWeapon);
-    TextView computerWeapon = (TextView) findViewById(R.id.computerWeapon);
-    TextView score = (TextView) findViewById(R.id.scoreText);
+    TextView winner;
+    TextView playerWeapon;
+    TextView computerWeapon;
+    TextView score;
 
     private Button rButton;
     private Button pButton;
     private Button sButton;
 
-   // private Weapon randomWeapon() {
-   //     int pick = new Random().nextInt(Weapon.values().length);
-   //     return Weapon.values()[pick];
-   // }
-//
+   private Weapon randomWeapon() {
+        int pick = new Random().nextInt(Weapon.values().length);
+        return Weapon.values()[pick];
+    }
+    int pScore=0;
+    int cScore=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +44,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        score.setText("Player: , Computer: ");
-        playerWeapon.setText("Player Weapon: ");
-        computerWeapon.setText("Computer Weapon: ");
-        winner.setText("");
+
+
+
 
         rButton = findViewById(R.id.buttonRock);
         rButton.setOnClickListener(this);
@@ -55,28 +55,87 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sButton = findViewById(R.id.buttonScissors);
         sButton.setOnClickListener(this);
 
+        winner = (TextView) findViewById(R.id.winText);
+        playerWeapon = (TextView) findViewById(R.id.playerWeapon);
+        computerWeapon = (TextView) findViewById(R.id.computerWeapon);
+        score = (TextView) findViewById(R.id.scoreText);
 
+        score.setText("Player: , Computer:");
+        playerWeapon.setText("Player Weapon: ");
+        computerWeapon.setText("Computer Weapon:");
+        winner.setText("");
     }
 
     @Override
     public void onClick(View view) {
-        playerWeapon.setText("Player Weapon:" + player.toString());
-        computer = computer.getRandomWeapon();
-        computerWeapon.setText("Computer Weapon: "+ computer.toString());
-        winner.setText(whoWins());
-        score.setText("Player: "+ playerScore() +" , Computer: "+ computerScore());
-
 
         switch (view.getId()) {
             case R.id.buttonRock:
 
                 player = Weapon.ROCK;
+                playerWeapon.setText("Player Weapon: "+ player.toString());
+
+                computer = randomWeapon();
+                computerWeapon.setText("Computer Weapon: "+ computer.toString());
+                if (isDraw()==true){
+                    winner.setText("It is a Draw!");
+                }
+                else if((isPlayerWin()==true)&& (isDraw()==false)){
+                    winner.setText("Player wins...Rock crumbles Scissors");
+                    ++pScore;
+                }
+                else if((isPlayerWin()==false)&& (isDraw()==false)){
+                    winner.setText("Computer wins...Paper Wraps Rock");
+                    ++cScore;
+                }
+
+                score.setText("Player: "+ pScore +" , Computer: "+ cScore);
                 break;
+
+
             case R.id.buttonPaper:
                 player = Weapon.PAPER;
+                playerWeapon.setText("Player Weapon: "+ player.toString());
+
+                computer = randomWeapon();
+                computerWeapon.setText("Computer Weapon: "+ computer.toString());
+                if (isDraw()==true){
+                    winner.setText("It is a Draw!");
+                }
+
+                else if((isPlayerWin()==true)&& (isDraw()==false)){
+                    winner.setText("Player wins...Paper Wraps Rock");
+                    ++pScore;
+                }
+                else if((isPlayerWin()==false)&& (isDraw()==false)){
+                    winner.setText("Computer wins...Scissors cuts Paper!");
+                    ++cScore;
+                }
+
+                score.setText("Player: "+ pScore +" , Computer: "+ cScore);
                 break;
+
+
             case R.id.buttonScissors:
                 player = Weapon.SCISSORS;
+                playerWeapon.setText("Player Weapon: "+ player.toString());
+
+                computer = randomWeapon();
+                computerWeapon.setText("Computer Weapon: "+ computer.toString());
+                if (isDraw()==true){
+                    winner.setText("It is a Draw!");
+                }
+                else if((isPlayerWin()==true)&& (isDraw()==false)){
+                    winner.setText("Player wins...Scissors cuts Paper!");
+                    ++pScore;
+                }
+                else if((isPlayerWin()==false)&& (isDraw()==false)){
+                    winner.setText("Computer wins...Rock crumbles Scissors!");
+                    ++cScore;
+                }
+
+                score.setText("Player: "+ pScore +" , Computer: "+ cScore);
+
                 break;
         }
     }
@@ -130,86 +189,55 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     };
 
 
-    public int isWin() {
-        int win;
-        if( (player == Weapon.ROCK) && (computer == Weapon.SCISSORS)){
+    public boolean isPlayerWin() {
+        boolean playerwin = false;
 
-            win =1;
-                    //"Player wins ...  Rock crushes Scissors!";
+        switch (player){
+            case ROCK:
+                if(computer==Weapon.SCISSORS){
+                    playerwin=true;
+                }
+                break;
+            case PAPER:
+                if(computer==Weapon.ROCK){
+                    playerwin=true;
+                }
 
-        }
-
-        if ( (player==Weapon.PAPER) && (computer==Weapon.ROCK)){
-
-            win =2;
-        //"Player wins ... Paper covers Rock!";
-
-        }
-        if((player == Weapon.SCISSORS) && (computer==Weapon.PAPER)){
-            win=5;
-        }
-        if (player == computer) {
-            win = 3;
-            //"Its a Draw!";
+            case SCISSORS:
+                if(computer==Weapon.PAPER){
+                    playerwin=true;
+                }
 
         }
-
-
-        else {
-
-            win =4;
-            //"Computer player Wins!";
-
-        }
-
-        return win;
+       return playerwin;
 
 
     }
-    public String whoWins(){
-        String whoWins = null;
+    public boolean isDraw(){
+        boolean draw = false;
 
-        switch(isWin()){
-            case 1:
-                whoWins="Player wins ...  Rock crushes Scissors!";
+        switch(player){
+            case ROCK:
+                if(computer==Weapon.ROCK){
+                    draw=true;
+                }
                 break;
-            case 2:
-                whoWins="Player wins ... Paper covers Rock!";
-                break;
-            case 3:
-                whoWins="It is a Draw!";
-                break;
-            case 4:
-                whoWins="Computer player Wins!";
-                break;
-            case 5:
-                whoWins=" Player wins.... Scissors cuts Paper"
+            case PAPER:
+                if(computer==Weapon.PAPER){
+                    draw=true;
+                }
+
+            case SCISSORS:
+                if(computer==Weapon.SCISSORS){
+                    draw=true;
+                }
+
         }
 
-        return whoWins;
-
+        return draw;
     }
-    public int playerScore(){
-        isWin();
-        int pScore =0;
 
-        if(isWin() == 1){
-            ++pScore;
-        }
-        if(isWin() == 2){
-            ++pScore;
-        }
-        return pScore;
-    }
-    public int computerScore(){
-        isWin();
-        int cScore =0;
 
-        if(isWin() == 4) {
-            ++cScore;
-        }
-        return cScore;
-    }
 }
 
 
