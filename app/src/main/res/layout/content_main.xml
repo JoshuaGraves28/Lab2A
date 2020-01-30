@@ -12,17 +12,25 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome To Rock, Paper, Scissors"
+        android:layout_marginTop="32dp"
+        android:text="@string/welcome_to_rock_paper_scissors"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Please Choose Your Weapon:"
+        android:layout_marginTop="8dp"
+        android:text="@string/please_choose_your_weapon"
+        app:layout_constraintBottom_toTopOf="@+id/buttonRock"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -30,8 +38,11 @@
         android:id="@+id/buttonRock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rock"
+        android:layout_marginTop="8dp"
+        android:text="@string/rock"
+        app:layout_constraintBottom_toTopOf="@+id/buttonPaper"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -39,8 +50,11 @@
         android:id="@+id/buttonPaper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Paper"
+        android:layout_marginTop="8dp"
+        android:text="@string/paper"
+        app:layout_constraintBottom_toTopOf="@+id/buttonScissors"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonRock" />
 
@@ -48,8 +62,11 @@
         android:id="@+id/buttonScissors"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Scissors"
+        android:layout_marginTop="8dp"
+        android:text="@string/scissors"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonPaper" />
 
@@ -57,6 +74,7 @@
         android:id="@+id/scoreText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonScissors" />
@@ -65,6 +83,7 @@
         android:id="@+id/playerWeapon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scoreText" />
@@ -73,6 +92,7 @@
         android:id="@+id/computerWeapon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/playerWeapon" />
@@ -81,6 +101,7 @@
         android:id="@+id/winText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/computerWeapon" />

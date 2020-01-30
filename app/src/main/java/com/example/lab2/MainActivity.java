@@ -17,19 +17,24 @@ import android.widget.TextView;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
     Weapon player;
     Weapon computer;
+
     TextView winner = (TextView) findViewById(R.id.winText);
     TextView playerWeapon = (TextView) findViewById(R.id.playerWeapon);
     TextView computerWeapon = (TextView) findViewById(R.id.computerWeapon);
     TextView score = (TextView) findViewById(R.id.scoreText);
+
     private Button rButton;
+    private Button pButton;
+    private Button sButton;
 
-    private Weapon randomWeapon() {
-        int pick = new Random().nextInt(Weapon.values().length);
-        return Weapon.values()[pick];
-    }
-
+   // private Weapon randomWeapon() {
+   //     int pick = new Random().nextInt(Weapon.values().length);
+   //     return Weapon.values()[pick];
+   // }
+//
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,25 +42,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         score.setText("Player: , Computer: ");
         playerWeapon.setText("Player Weapon: ");
         computerWeapon.setText("Computer Weapon: ");
         winner.setText("");
+
         rButton = findViewById(R.id.buttonRock);
         rButton.setOnClickListener(this);
+        pButton = findViewById(R.id.buttonPaper);
+        pButton.setOnClickListener(this);
+        sButton = findViewById(R.id.buttonScissors);
+        sButton.setOnClickListener(this);
+
+
     }
 
     @Override
     public void onClick(View view) {
+        playerWeapon.setText("Player Weapon:" + player.toString());
+        computer = computer.getRandomWeapon();
+        computerWeapon.setText("Computer Weapon: "+ computer.toString());
+        winner.setText(whoWins());
+        score.setText("Player: "+ playerScore() +" , Computer: "+ computerScore());
+
+
         switch (view.getId()) {
             case R.id.buttonRock:
 
                 player = Weapon.ROCK;
-                playerWeapon.setText("Player Weapon:" + player);
-                computer = randomWeapon();
-                computerWeapon.setText("Computer Weapon: " + computer);
-                winner.setText(whoWins());
-                score.setText("Player: "+ playerScore() +" , Computer: "+ computerScore());
+                break;
+            case R.id.buttonPaper:
+                player = Weapon.PAPER;
+                break;
+            case R.id.buttonScissors:
+                player = Weapon.SCISSORS;
+                break;
         }
     }
 
@@ -98,23 +120,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return message;
         }
 
-    }
+        public Weapon getRandomWeapon(){
+            Weapon[] values = Weapon.values();
+            Random r = new Random();
+            return (values[r.nextInt(values.length)]);
+
+        }
+
+    };
+
 
     public int isWin() {
         int win;
-        if ( player = Weapon.ROCK; && computer = Weapon.SCISSORS;){
+        if( (player == Weapon.ROCK) && (computer == Weapon.SCISSORS)){
 
             win =1;
                     //"Player wins ...  Rock crushes Scissors!";
 
         }
-        if ( player.equals(Weapon.PAPER); && computer.equals(Weapon.ROCK);){
+
+        if ( (player==Weapon.PAPER) && (computer==Weapon.ROCK)){
 
             win =2;
         //"Player wins ... Paper covers Rock!";
 
         }
-        if(player = Weapon.SCISSORS; && computer=Weapon.PAPER;){
+        if((player == Weapon.SCISSORS) && (computer==Weapon.PAPER)){
             win=5;
         }
         if (player == computer) {
